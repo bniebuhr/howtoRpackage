@@ -3,6 +3,10 @@ title: "How to create R packages"
 output: html_notebook
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval= F, echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+```
+
 This is a tutorial on a few steps to create R packages.
 
 ## 0) Check if the name you chose to your package is available
@@ -25,11 +29,14 @@ library(usethis)
 usethis::create_package("howtoRpackage")
 ```
 
-## 2) Define a license
+## 2) Create README and define a license
 
 One can define a license by hand or using a few pre-determined functions from the `usethis` package. If we use the function, this will modify both the `DESCRIPTION` file and also add a  `LICENSE.md` file.
 
 ```{r}
+# Begin readme
+usethis::use_readme_md()
+
 # Define GPL3 as our license
 usethis::use_gpl3_license(name = "Bernardo Niebuhr, Elie Gurarie et al")
 ```
@@ -82,5 +89,7 @@ We can add some info to the functions, using the `roxygen2` notation, and it wil
 
 ```{r}
 usethis::use_git(message = "initial commit")
+
+usethis::use_github()
 ```
 

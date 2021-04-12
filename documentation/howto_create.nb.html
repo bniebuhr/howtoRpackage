@@ -1737,6 +1737,8 @@ pre code {
 
 
 <!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
 <p>This is a tutorial on a few steps to create R packages.</p>
 <div id="check-if-the-name-you-chose-to-your-package-is-available" class="section level2">
 <h2>0) Check if the name you chose to your package is available</h2>
@@ -1764,21 +1766,18 @@ usethis::create_package(&quot;howtoRpackage&quot;)</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="define-a-license" class="section level2">
-<h2>2) Define a license</h2>
+<div id="create-readme-and-define-a-license" class="section level2">
+<h2>2) Create README and define a license</h2>
 <p>One can define a license by hand or using a few pre-determined functions from the <code>usethis</code> package. If we use the function, this will modify both the <code>DESCRIPTION</code> file and also add a <code>LICENSE.md</code> file.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudXNldGhpczo6dXNlX2dwbDNfbGljZW5zZShuYW1lID0gXCJCZXJuYXJkbyBOaWVidWhyLCBFbGllIEd1cmFyaWUgZXQgYWxcIilcblxuYGBgIn0= -->
-<pre class="r"><code>usethis::use_gpl3_license(name = &quot;Bernardo Niebuhr, Elie Gurarie et al&quot;)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBCZWdpbiByZWFkbWVcbnVzZXRoaXM6OnVzZV9yZWFkbWVfbWQoKVxuXG4jIERlZmluZSBHUEwzIGFzIG91ciBsaWNlbnNlXG51c2V0aGlzOjp1c2VfZ3BsM19saWNlbnNlKG5hbWUgPSBcIkJlcm5hcmRvIE5pZWJ1aHIsIEVsaWUgR3VyYXJpZSBldCBhbFwiKVxuYGBgIn0= -->
+<pre class="r"><code># Begin readme
+usethis::use_readme_md()
+
+# Define GPL3 as our license
+usethis::use_gpl3_license(name = &quot;Bernardo Niebuhr, Elie Gurarie et al&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidiBTZXR0aW5nIGFjdGl2ZSBwcm9qZWN0IHRvICdDOi9Vc2Vycy9iZWJzMDAwMS9PbmVEcml2ZSAtIFN2ZXJpZ2VzIExhbnRicnVrc3VuaXZlcnNpdGV0L2NsYXNzX1JwYWNrYWdlL2hvd3RvUnBhY2thZ2UnXG52IFNldHRpbmcgTGljZW5zZSBmaWVsZCBpbiBERVNDUklQVElPTiB0byAnR1BMLTMnXG52IFdyaXRpbmcgJ0xJQ0VOU0UubWQnXG52IEFkZGluZyAnXkxJQ0VOU0VcXFxcLm1kJCcgdG8gJy5SYnVpbGRpZ25vcmUnXG4ifQ== -->
-<pre><code>v Setting active project to &#39;C:/Users/bebs0001/OneDrive - Sveriges Lantbruksuniversitet/class_Rpackage/howtoRpackage&#39;
-v Setting License field in DESCRIPTION to &#39;GPL-3&#39;
-v Writing &#39;LICENSE.md&#39;
-v Adding &#39;^LICENSE\\.md$&#39; to &#39;.Rbuildignore&#39;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1790,16 +1789,13 @@ v Adding &#39;^LICENSE\\.md$&#39; to &#39;.Rbuildignore&#39;</code></pre>
 <h2>4) Add packages upon which the functions depend</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTdWdnZXN0ZWQgcGFja2FnZXNcbnVzZXRoaXM6OnVzZV9wYWNrYWdlKFwicGx5clwiLCB0eXBlID0gXCJTdWdnZXN0c1wiKVxuXG5gYGAifQ== -->
-<pre class="r"><code># Suggested packages
-usethis::use_package(&quot;plyr&quot;, type = &quot;Suggests&quot;)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBOZWNlc3NhcnkgcGFja2FnZXNcbnVzZXRoaXM6OnVzZV9wYWNrYWdlKFwic3BcIiwgdHlwZSA9IFwiSW1wb3J0c1wiKVxuXG4jIFN1Z2dlc3RlZCBwYWNrYWdlc1xudXNldGhpczo6dXNlX3BhY2thZ2UoXCJwbHlyXCIsIHR5cGUgPSBcIlN1Z2dlc3RzXCIpXG5gYGAifQ== -->
+<pre class="r"><code># Necessary packages
+usethis::use_package(&quot;sp&quot;, type = &quot;Imports&quot;)
+
+# Suggested packages
+usethis::use_package(&quot;plyr&quot;, type = &quot;Suggests&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidiBBZGRpbmcgJ3BseXInIHRvIFN1Z2dlc3RzIGZpZWxkIGluIERFU0NSSVBUSU9OXG4qIFVzZSBgcmVxdWlyZU5hbWVzcGFjZShcInBseXJcIiwgcXVpZXRseSA9IFRSVUUpYCB0byB0ZXN0IGlmIHBhY2thZ2UgaXMgaW5zdGFsbGVkXG4qIFRoZW4gZGlyZWN0bHkgcmVmZXIgdG8gZnVuY3RvbnMgbGlrZSBgcGx5cjo6ZnVuKClgIChyZXBsYWNpbmcgYGZ1bigpYCkuXG4ifQ== -->
-<pre><code>v Adding &#39;plyr&#39; to Suggests field in DESCRIPTION
-* Use `requireNamespace(&quot;plyr&quot;, quietly = TRUE)` to test if package is installed
-* Then directly refer to functons like `plyr::fun()` (replacing `fun()`).</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1850,58 +1846,21 @@ save(juveniles, file = &quot;data/juveniles.rda&quot;)</code></pre>
 <p>We can add some info to the functions, using the <code>roxygen2</code> notation, and it will be transformed into documentation in the <code>man</code> folder.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudXNldGhpczo6dXNlX2dpdChtZXNzYWdlID0gXCJpbml0aWFsIGNvbW1pdFwiKVxuXG5gYGAifQ== -->
-<pre class="r"><code>usethis::use_git(message = &quot;initial commit&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudXNldGhpczo6dXNlX2dpdGh1YigpXG5cbmBgYCJ9 -->
+<pre class="r"><code>usethis::use_github()
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidiBTZXR0aW5nIGFjdGl2ZSBwcm9qZWN0IHRvICdDOi9Vc2Vycy9iZWJzMDAwMS9PbmVEcml2ZSAtIFN2ZXJpZ2VzIExhbnRicnVrc3VuaXZlcnNpdGV0L2NsYXNzX1JwYWNrYWdlL2hvd3RvUnBhY2thZ2UnXG52IEluaXRpYWxpc2luZyBHaXQgcmVwb1xudiBBZGRpbmcgJy5SaGlzdG9yeScsICcuUmRhdGEnLCAnLmh0dHItb2F1dGgnLCAnLkRTX1N0b3JlJyB0byAnZG9jdW1lbnRhdGlvbi8uZ2l0aWdub3JlJ1xuVGhlcmUgYXJlIDEyIHVuY29tbWl0dGVkIGZpbGVzOlxuKiAnZG9jdW1lbnRhdGlvbi8uZ2l0aWdub3JlJ1xuKiAnZG9jdW1lbnRhdGlvbi8uUmJ1aWxkaWdub3JlJ1xuKiAnZG9jdW1lbnRhdGlvbi9kYXRhLXJhdy8nXG4qICdkb2N1bWVudGF0aW9uL2RhdGEvJ1xuKiAnZG9jdW1lbnRhdGlvbi9ERVNDUklQVElPTidcbiogJ2RvY3VtZW50YXRpb24vZG9jdW1lbnRhdGlvbi8nXG4qICdkb2N1bWVudGF0aW9uL2V4YW1wbGVzLydcbiogJ2RvY3VtZW50YXRpb24vaG93dG9ScGFja2FnZS5ScHJvaidcbiogJ2RvY3VtZW50YXRpb24vTElDRU5TRS5tZCdcbiogJ2RvY3VtZW50YXRpb24vbWFuLydcbiogLi4uXG5JcyBpdCBvayB0byBjb21taXQgdGhlbT9cbiJ9 -->
-<pre><code>v Setting active project to &#39;C:/Users/bebs0001/OneDrive - Sveriges Lantbruksuniversitet/class_Rpackage/howtoRpackage&#39;
-v Initialising Git repo
-v Adding &#39;.Rhistory&#39;, &#39;.Rdata&#39;, &#39;.httr-oauth&#39;, &#39;.DS_Store&#39; to &#39;documentation/.gitignore&#39;
-There are 12 uncommitted files:
-* &#39;documentation/.gitignore&#39;
-* &#39;documentation/.Rbuildignore&#39;
-* &#39;documentation/data-raw/&#39;
-* &#39;documentation/data/&#39;
-* &#39;documentation/DESCRIPTION&#39;
-* &#39;documentation/documentation/&#39;
-* &#39;documentation/examples/&#39;
-* &#39;documentation/howtoRpackage.Rproj&#39;
-* &#39;documentation/LICENSE.md&#39;
-* &#39;documentation/man/&#39;
-* ...
-Is it ok to commit them?</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiaSBEZWZhdWx0aW5nIHRvICdodHRwcycgR2l0IHByb3RvY29sXG52IFNldHRpbmcgYWN0aXZlIHByb2plY3QgdG8gJ0M6L1VzZXJzL2JlYnMwMDAxL09uZURyaXZlIC0gU3ZlcmlnZXMgTGFudGJydWtzdW5pdmVyc2l0ZXQvY2xhc3NfUnBhY2thZ2UvaG93dG9ScGFja2FnZSdcbnYgQ2hlY2tpbmcgdGhhdCBjdXJyZW50IGJyYW5jaCBpcyBkZWZhdWx0IGJyYW5jaCAoJ21hc3RlcicpXG4ifQ== -->
+<pre><code>i Defaulting to &#39;https&#39; Git protocol
+v Setting active project to &#39;C:/Users/bebs0001/OneDrive - Sveriges Lantbruksuniversitet/class_Rpackage/howtoRpackage&#39;
+v Checking that current branch is default branch (&#39;master&#39;)</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG4xOiBOZWdhdGl2ZVxuMjogTm9cbjM6IEZvciBzdXJlXG4ifQ== -->
-<pre><code>
-1: Negative
-2: No
-3: For sure</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuM1xuYGBgIn0= -->
-<pre class="r"><code>3</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidiBBZGRpbmcgZmlsZXNcbnYgTWFraW5nIGEgY29tbWl0IHdpdGggbWVzc2FnZSAnaW5pdGlhbCBjb21taXQnXG4qIEEgcmVzdGFydCBvZiBSU3R1ZGlvIGlzIHJlcXVpcmVkIHRvIGFjdGl2YXRlIHRoZSBHaXQgcGFuZVxuUmVzdGFydCBub3c/XG4ifQ== -->
-<pre><code>v Adding files
-v Making a commit with message &#39;initial commit&#39;
-* A restart of RStudio is required to activate the Git pane
-Restart now?</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG4xOiBOb1xuMjogSSBhZ3JlZVxuMzogQWJzb2x1dGVseSBub3RcbiJ9 -->
-<pre><code>
-1: No
-2: I agree
-3: Absolutely not</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMlxuYGBgIn0= -->
-<pre class="r"><code>2</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkhvdyB0byBjcmVhdGUgUiBwYWNrYWdlcyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNClRoaXMgaXMgYSB0dXRvcmlhbCBvbiBhIGZldyBzdGVwcyB0byBjcmVhdGUgUiBwYWNrYWdlcy4NCg0KIyMgMCkgQ2hlY2sgaWYgdGhlIG5hbWUgeW91IGNob3NlIHRvIHlvdXIgcGFja2FnZSBpcyBhdmFpbGFibGUNCg0KYGBge3IsIGV2YWwgPSBGfQ0KbGlicmFyeShhdmFpbGFibGUpDQoNCmF2YWlsYWJsZSgiaG93dG9ScGFja2FnZSIsIGJyb3dzZSA9IEYpDQpgYGANCg0KDQojIyAxKSBDcmVhdGUgdGhlIFIgcGFja2FnZSB3aXRoaW4gUg0KDQpXZSBjYW4gY3JlYXRlIHRoZSBzdHJ1Y3R1cmUgb2YgYSBwYWNrYWdlIHVzaW5nIHRoZSBmdW5jdGlvbiBgY3JlYXRlX3BhY2thZ2VgIGZyb20gdGhlIGB1c2V0aGlzYCBwYWNrYWdlLiBUaGlzIGNyZWF0ZSB0aGUgdmVyeSBtaW5pbWFsIHN0cnVjdHVyZSBiZWZvcmUgYnVpbGRpbmcgdGhlIHBhY2thZ2UuDQoNCmBgYHtyfQ0KbGlicmFyeSh1c2V0aGlzKQ0KDQojIGNyZWF0ZSB0aGUgcGFja2FnZSBzdHJ1Y3R1cmUNCnVzZXRoaXM6OmNyZWF0ZV9wYWNrYWdlKCJob3d0b1JwYWNrYWdlIikNCmBgYA0KDQojIyAyKSBEZWZpbmUgYSBsaWNlbnNlDQoNCk9uZSBjYW4gZGVmaW5lIGEgbGljZW5zZSBieSBoYW5kIG9yIHVzaW5nIGEgZmV3IHByZS1kZXRlcm1pbmVkIGZ1bmN0aW9ucyBmcm9tIHRoZSBgdXNldGhpc2AgcGFja2FnZS4gSWYgd2UgdXNlIHRoZSBmdW5jdGlvbiwgdGhpcyB3aWxsIG1vZGlmeSBib3RoIHRoZSBgREVTQ1JJUFRJT05gIGZpbGUgYW5kIGFsc28gYWRkIGEgIGBMSUNFTlNFLm1kYCBmaWxlLg0KDQpgYGB7cn0NCiMgRGVmaW5lIEdQTDMgYXMgb3VyIGxpY2Vuc2UNCnVzZXRoaXM6OnVzZV9ncGwzX2xpY2Vuc2UobmFtZSA9ICJCZXJuYXJkbyBOaWVidWhyLCBFbGllIEd1cmFyaWUgZXQgYWwiKQ0KYGBgDQoNCiMjIDMpIEFkZCBzb21lIGZ1bmN0aW9ucw0KDQpOb3cgd2UgYWRkIHNvbWUgZnVuY3Rpb25zLiBXZSBjYW4gY3JlYXRlIHRoZW0gYnkgaGFuZCAoanVzdCBjb3B5IGFuZCBwYXN0ZSBub3cpIHdpdGhpbiB0aGUgYFJgIGZvbGRlci4gTm93IHdlIGNhbiBidWlsZA0KDQojIyA0KSBBZGQgcGFja2FnZXMgdXBvbiB3aGljaCB0aGUgZnVuY3Rpb25zIGRlcGVuZA0KDQpgYGB7cn0NCiMgTmVjZXNzYXJ5IHBhY2thZ2VzDQp1c2V0aGlzOjp1c2VfcGFja2FnZSgic3AiLCB0eXBlID0gIkltcG9ydHMiKQ0KDQojIFN1Z2dlc3RlZCBwYWNrYWdlcw0KdXNldGhpczo6dXNlX3BhY2thZ2UoInBseXIiLCB0eXBlID0gIlN1Z2dlc3RzIikNCmBgYA0KDQojIyA1KSBBZGQgZGF0YSAtIG5vdyB3ZSBhZGQgYm90aCByYXcgYW5kIHJlYWR5IHRvIHVzZQ0KDQpGaXJzdCB3ZSBjcmVhdGUgdGhlIGByYXctZGF0YWAgZm9sZGVyIHVzaW5nIHRoZSBgdXNlX2RhdGFfcmF3YCBmdW5jdGlvbi4gSXQgd2lsbCBhbHNvIGNyZWF0ZSBhIHNjcmlwdCBmb3IgcHJlcGFyYXRpb24gb2YgdGhlIHJhdyBkYXRhIGludG8gdGhlIFIgZGF0YSBmb3JtYXQsIGAucmRhYC4NCg0KYGBge3J9DQojIGFkZCByYXcgZGF0YQ0KdXNldGhpczo6dXNlX2RhdGFfcmF3KCkNCmBgYA0KDQpOb3csIHdlIHB1dCB0aGUgb3VyIGRhdGFzZXQgaW4gdGhlIGBkYXRhLXJhd2AgZm9sZGVyLiBUaGVuIHdlIGNhbiBlZGl0IHRoZSBzY3JpcHQgZm9yIHByZXBhcmluZyB0aGUgZGF0YXNldC4gVGhlcmUgd2UgcmVhZCBhbmQgcHJlcGFyZSB0aGUgZGF0YSwgdGhlbiB3ZSBzYXZlIGl0IGFzIGAucmRhYCB1c2luZywgZS5nLiB0aGUgZnVuY3Rpb24gYHVzZXRoaXM6OnVzZV9kYXRhYCBvciBgc2F2ZSgpYDoNCg0KYGBge3J9DQojIHJlYWQgZGF0YQ0KanV2ZW5pbGVzIDwtIHJlYWQuY3N2KCJkYXRhLXJhdy9zdWJzZXRHUFNsb2NzLmNzdiIpDQoNCiMgY3JlYXRlIGRhdGEgZm9yIHVzZSBpbiB0aGUgUnBhY2thZ2UNCnVzZXRoaXM6OnVzZV9kYXRhKGp1dmVuaWxlcywgb3ZlcndyaXRlID0gVFJVRSkNCg0KIyBvcg0KZGlyLmNyZWF0ZSgiZGF0YS8iKQ0Kc2F2ZShqdXZlbmlsZXMsIGZpbGUgPSAiZGF0YS9qdXZlbmlsZXMucmRhIikNCmBgYA0KDQojIyA2KSBVc2UgdGhlIHBhY2thZ2UNCg0KTm93IHdlIGNhbiB1c2UgdGhlIHBhY2thZ2UsIGFuZCB0aGVuIHNhdmUgdGhpcyBhcyBhbiBleGFtcGxlIHNjcmlwdCBvbiBob3cNCnRvIHVzZSBvdXIgZnVuY3Rpb25zLg0KDQojIyA3KSBBZGQgc29tZSBgcm94eXhlbjJgIGRvY3VtZW50YXRpb24gdG8gdGhlIHNjcmlwdA0KDQpXZSBjYW4gYWRkIHNvbWUgaW5mbyB0byB0aGUgZnVuY3Rpb25zLCB1c2luZyB0aGUgYHJveHlnZW4yYCBub3RhdGlvbiwgYW5kIGl0IHdpbGwgYmUgdHJhbnNmb3JtZWQgaW50byBkb2N1bWVudGF0aW9uIGluIHRoZSBgbWFuYCBmb2xkZXIuDQoNCmBgYHtyfQ0KdXNldGhpczo6dXNlX2dpdChtZXNzYWdlID0gImluaXRpYWwgY29tbWl0IikNCmBgYA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkhvdyB0byBjcmVhdGUgUiBwYWNrYWdlcyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGV2YWw9IEYsIGVjaG8gPSBUUlVFLCBjYWNoZSA9IFRSVUUsIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFKQ0KYGBgDQoNClRoaXMgaXMgYSB0dXRvcmlhbCBvbiBhIGZldyBzdGVwcyB0byBjcmVhdGUgUiBwYWNrYWdlcy4NCg0KIyMgMCkgQ2hlY2sgaWYgdGhlIG5hbWUgeW91IGNob3NlIHRvIHlvdXIgcGFja2FnZSBpcyBhdmFpbGFibGUNCg0KYGBge3IsIGV2YWwgPSBGfQ0KbGlicmFyeShhdmFpbGFibGUpDQoNCmF2YWlsYWJsZSgiaG93dG9ScGFja2FnZSIsIGJyb3dzZSA9IEYpDQpgYGANCg0KDQojIyAxKSBDcmVhdGUgdGhlIFIgcGFja2FnZSB3aXRoaW4gUg0KDQpXZSBjYW4gY3JlYXRlIHRoZSBzdHJ1Y3R1cmUgb2YgYSBwYWNrYWdlIHVzaW5nIHRoZSBmdW5jdGlvbiBgY3JlYXRlX3BhY2thZ2VgIGZyb20gdGhlIGB1c2V0aGlzYCBwYWNrYWdlLiBUaGlzIGNyZWF0ZSB0aGUgdmVyeSBtaW5pbWFsIHN0cnVjdHVyZSBiZWZvcmUgYnVpbGRpbmcgdGhlIHBhY2thZ2UuDQoNCmBgYHtyfQ0KbGlicmFyeSh1c2V0aGlzKQ0KDQojIGNyZWF0ZSB0aGUgcGFja2FnZSBzdHJ1Y3R1cmUNCnVzZXRoaXM6OmNyZWF0ZV9wYWNrYWdlKCJob3d0b1JwYWNrYWdlIikNCmBgYA0KDQojIyAyKSBDcmVhdGUgUkVBRE1FIGFuZCBkZWZpbmUgYSBsaWNlbnNlDQoNCk9uZSBjYW4gZGVmaW5lIGEgbGljZW5zZSBieSBoYW5kIG9yIHVzaW5nIGEgZmV3IHByZS1kZXRlcm1pbmVkIGZ1bmN0aW9ucyBmcm9tIHRoZSBgdXNldGhpc2AgcGFja2FnZS4gSWYgd2UgdXNlIHRoZSBmdW5jdGlvbiwgdGhpcyB3aWxsIG1vZGlmeSBib3RoIHRoZSBgREVTQ1JJUFRJT05gIGZpbGUgYW5kIGFsc28gYWRkIGEgIGBMSUNFTlNFLm1kYCBmaWxlLg0KDQpgYGB7cn0NCiMgQmVnaW4gcmVhZG1lDQp1c2V0aGlzOjp1c2VfcmVhZG1lX21kKCkNCg0KIyBEZWZpbmUgR1BMMyBhcyBvdXIgbGljZW5zZQ0KdXNldGhpczo6dXNlX2dwbDNfbGljZW5zZShuYW1lID0gIkJlcm5hcmRvIE5pZWJ1aHIsIEVsaWUgR3VyYXJpZSBldCBhbCIpDQpgYGANCg0KIyMgMykgQWRkIHNvbWUgZnVuY3Rpb25zDQoNCk5vdyB3ZSBhZGQgc29tZSBmdW5jdGlvbnMuIFdlIGNhbiBjcmVhdGUgdGhlbSBieSBoYW5kIChqdXN0IGNvcHkgYW5kIHBhc3RlIG5vdykgd2l0aGluIHRoZSBgUmAgZm9sZGVyLiBOb3cgd2UgY2FuIGJ1aWxkDQoNCiMjIDQpIEFkZCBwYWNrYWdlcyB1cG9uIHdoaWNoIHRoZSBmdW5jdGlvbnMgZGVwZW5kDQoNCmBgYHtyfQ0KIyBOZWNlc3NhcnkgcGFja2FnZXMNCnVzZXRoaXM6OnVzZV9wYWNrYWdlKCJzcCIsIHR5cGUgPSAiSW1wb3J0cyIpDQoNCiMgU3VnZ2VzdGVkIHBhY2thZ2VzDQp1c2V0aGlzOjp1c2VfcGFja2FnZSgicGx5ciIsIHR5cGUgPSAiU3VnZ2VzdHMiKQ0KYGBgDQoNCiMjIDUpIEFkZCBkYXRhIC0gbm93IHdlIGFkZCBib3RoIHJhdyBhbmQgcmVhZHkgdG8gdXNlDQoNCkZpcnN0IHdlIGNyZWF0ZSB0aGUgYHJhdy1kYXRhYCBmb2xkZXIgdXNpbmcgdGhlIGB1c2VfZGF0YV9yYXdgIGZ1bmN0aW9uLiBJdCB3aWxsIGFsc28gY3JlYXRlIGEgc2NyaXB0IGZvciBwcmVwYXJhdGlvbiBvZiB0aGUgcmF3IGRhdGEgaW50byB0aGUgUiBkYXRhIGZvcm1hdCwgYC5yZGFgLg0KDQpgYGB7cn0NCiMgYWRkIHJhdyBkYXRhDQp1c2V0aGlzOjp1c2VfZGF0YV9yYXcoKQ0KYGBgDQoNCk5vdywgd2UgcHV0IHRoZSBvdXIgZGF0YXNldCBpbiB0aGUgYGRhdGEtcmF3YCBmb2xkZXIuIFRoZW4gd2UgY2FuIGVkaXQgdGhlIHNjcmlwdCBmb3IgcHJlcGFyaW5nIHRoZSBkYXRhc2V0LiBUaGVyZSB3ZSByZWFkIGFuZCBwcmVwYXJlIHRoZSBkYXRhLCB0aGVuIHdlIHNhdmUgaXQgYXMgYC5yZGFgIHVzaW5nLCBlLmcuIHRoZSBmdW5jdGlvbiBgdXNldGhpczo6dXNlX2RhdGFgIG9yIGBzYXZlKClgOg0KDQpgYGB7cn0NCiMgcmVhZCBkYXRhDQpqdXZlbmlsZXMgPC0gcmVhZC5jc3YoImRhdGEtcmF3L3N1YnNldEdQU2xvY3MuY3N2IikNCg0KIyBjcmVhdGUgZGF0YSBmb3IgdXNlIGluIHRoZSBScGFja2FnZQ0KdXNldGhpczo6dXNlX2RhdGEoanV2ZW5pbGVzLCBvdmVyd3JpdGUgPSBUUlVFKQ0KDQojIG9yDQpkaXIuY3JlYXRlKCJkYXRhLyIpDQpzYXZlKGp1dmVuaWxlcywgZmlsZSA9ICJkYXRhL2p1dmVuaWxlcy5yZGEiKQ0KYGBgDQoNCiMjIDYpIFVzZSB0aGUgcGFja2FnZQ0KDQpOb3cgd2UgY2FuIHVzZSB0aGUgcGFja2FnZSwgYW5kIHRoZW4gc2F2ZSB0aGlzIGFzIGFuIGV4YW1wbGUgc2NyaXB0IG9uIGhvdw0KdG8gdXNlIG91ciBmdW5jdGlvbnMuDQoNCiMjIDcpIEFkZCBzb21lIGByb3h5eGVuMmAgZG9jdW1lbnRhdGlvbiB0byB0aGUgc2NyaXB0DQoNCldlIGNhbiBhZGQgc29tZSBpbmZvIHRvIHRoZSBmdW5jdGlvbnMsIHVzaW5nIHRoZSBgcm94eWdlbjJgIG5vdGF0aW9uLCBhbmQgaXQgd2lsbCBiZSB0cmFuc2Zvcm1lZCBpbnRvIGRvY3VtZW50YXRpb24gaW4gdGhlIGBtYW5gIGZvbGRlci4NCg0KYGBge3J9DQp1c2V0aGlzOjp1c2VfZ2l0KG1lc3NhZ2UgPSAiaW5pdGlhbCBjb21taXQiKQ0KDQp1c2V0aGlzOjp1c2VfZ2l0aHViKCkNCmBgYA0KDQo=</div>
 
 
 
