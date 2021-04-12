@@ -80,4 +80,7 @@ to use our functions.
 
 We can add some info to the functions, using the `roxygen2` notation, and it will be transformed into documentation in the `man` folder.
 
+```{r}
+usethis::use_git(message = "initial commit")
+```
 
