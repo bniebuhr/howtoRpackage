@@ -19,3 +19,5 @@ Imports:
     sp
 Suggests: 
     plyr
+URL: https://github.com/bniebuhr/howtoRpackage
+BugReports: https://github.com/bniebuhr/howtoRpackage/issues
