@@ -1,0 +1,55 @@
+---
+title: "DemoScript"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(plyr)
+
+Albers.crs <-CRS("+proj=aea +lat_1=29.3 +lat_2=45.3 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0")
+
+juveniles <- read.csv("subsetGPSlocs.csv", header=T)
+
+juveniles$NewDate <- as.POSIXct(juveniles$NewDate, format="%Y-%m-%d %H:%M:%S", tz="EST")
+juveniles$SeasonYear <- NULL
+juveniles$SeasonYear[juveniles$NewDate > "2018-01-01 00:00:00" &
+  juveniles$NewDate < "2018-08-01 00:00:00"] <- "Spring18"
+juveniles$SeasonYear[juveniles$NewDate > "2019-01-01 00:00:00" &
+  juveniles$NewDate < "2019-08-01 00:00:00"] <- "Spring19"
+juveniles$SeasonYear[juveniles$NewDate > "2020-01-01 00:00:00" &
+  juveniles$NewDate < "2020-08-11 00:00:00"] <- "Spring20"
+juveniles$SeasonYear[juveniles$NewDate > "2018-07-31 23:59:00" &
+  juveniles$NewDate < "2018-12-31 23:59:00"] <- "Fall18"
+juveniles$SeasonYear[juveniles$NewDate > "2019-07-31 23:59:00" &
+  juveniles$NewDate < "2019-12-31 23:59:00"] <- "Fall19"
+
+juveniles$SeasonYearBurst <- c(paste(juveniles$individual.local.identifier,juveniles$SeasonYear,sep="_"))
+juveniles$SeasonYearBurst <- as.factor(juveniles$SeasonYearBurst)
+
+juv18to20<-data.frame(x = juveniles$x, y = juveniles$y)
+
+juv18to20.spdf <- SpatialPointsDataFrame(coords= juv18to20, data = juveniles, proj4string = Albers.crs)
+# writeOGR(juv18to20.spdf, dsn = ".", layer="PA_juveniles_all", driver = "ESRI Shapefile")
+# write.csv(juveniles,"juvenileGPSlocs.csv")
+
+
+fixrate <- function(x){
+   dates=range(x$NewDate)
+   print(dates)
+   days=as.numeric(round(diff(range(x$NewDate)), digits=0))
+   print(days)
+   sched=as.numeric(round(median(diff(x$NewDate)), digits=0))
+   print(sched)
+   expected= as.numeric(days)*round(1440/(as.numeric(sched)), digits=0)#1440 minutes in a day
+   print(expected)
+   success <- nrow(x)
+   print(success)
+   percentfix <- round(success/expected*100)
+   print(paste(percentfix,"%", sep=" "))
+}
+
+
+fix_deer <- ddply(juveniles, .(individual.local.identifier), fixrate)
+```
