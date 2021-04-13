@@ -8,18 +8,16 @@ The goal of howtoRpackage is to ...
 
 ## Installation
 
-You can install the released version of howtoRpackage from [CRAN](https://CRAN.R-project.org) with:
+You can install the dev version of howtoRpackage from [Github](https://github.com/bniebuhr/howtoRpackage) with:
 
 ``` r
-install.packages("howtoRpackage")
+library(devtools)
+
+devtools::install_github(repo = "https://github.com/bniebuhr/witch.git", ref = "HEAD")
 ```
 
-## Example
+## Building yourself
 
-This is a basic example which shows you how to solve a common problem:
+You can also clone (or fork + clone) this repo to your computer and build it yourself!
 
-``` r
-library(howtoRpackage)
-## basic example code
-```
 

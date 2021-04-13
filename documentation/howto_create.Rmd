@@ -1,6 +1,7 @@
 ---
 title: "How to create R packages"
-output: html_notebook
+author: "Bernardo Niebuhr, Elie Gurarie"
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
