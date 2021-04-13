@@ -1,0 +1,90 @@
+---
+title: "DemoScript"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+# libraries
+library(sp)
+library(plyr)
+
+# reference system
+Albers.crs <- CRS("+proj=aea +lat_1=29.3 +lat_2=45.3 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0")
+
+# read data
+juveniles <- read.csv("files/subsetGPSlocs.csv", header=T)
+
+# organize data
+prepare_data <- function(dat) {
+   
+   # date-time as posixct
+   dat$NewDate <- as.POSIXct(dat$NewDate, format="%Y-%m-%d %H:%M:%S", tz="EST")
+   
+   # season-year variable
+   dat$SeasonYear <- NULL
+   dat$SeasonYear[dat$NewDate > "2018-01-01 00:00:00" &
+     dat$NewDate < "2018-08-01 00:00:00"] <- "Spring18"
+   dat$SeasonYear[dat$NewDate > "2019-01-01 00:00:00" &
+     dat$NewDate < "2019-08-01 00:00:00"] <- "Spring19"
+   dat$SeasonYear[dat$NewDate > "2020-01-01 00:00:00" &
+     dat$NewDate < "2020-08-11 00:00:00"] <- "Spring20"
+   dat$SeasonYear[dat$NewDate > "2018-07-31 23:59:00" &
+     dat$NewDate < "2018-12-31 23:59:00"] <- "Fall18"
+   dat$SeasonYear[dat$NewDate > "2019-07-31 23:59:00" &
+     dat$NewDate < "2019-12-31 23:59:00"] <- "Fall19"
+   
+   # burst for each individual and season-year
+   dat$SeasonYearBurst <- c(paste(dat$individual.local.identifier,dat$SeasonYear,sep="_"))
+   dat$SeasonYearBurst <- as.factor(dat$SeasonYearBurst)
+   
+   # transform into spdf
+   juv18to20 <-data.frame(x = dat$x, y = dat$y)
+   
+   juv18to20.spdf <- SpatialPointsDataFrame(coords= juv18to20, data = juveniles, proj4string = Albers.crs)
+   
+   list(dat, juv18to20.spdf)
+   # save
+   # writeOGR(juv18to20.spdf, dsn = ".", layer="PA_juveniles_all", driver = "ESRI Shapefile")
+   # write.csv(juveniles,"juvenileGPSlocs.csv")
+}
+
+# calculate fix rate success
+fix_rate <- function(x){
+   print(paste("Individual:", x$individual.local.identifier[1]))
+   dates=range(x$NewDate)
+   print(paste("Range:", dates))
+   days=as.numeric(round(diff(range(x$NewDate)), digits=0))
+   print(paste("Number of monitoring days:", days))
+   sched=as.numeric(round(median(difftime(x$NewDate[-1], x$NewDate[-length(x$NewDate)], unit='mins'), digits=0)))
+   # sched=as.numeric(round(median(abs(diff(sapply(x$NewDate[2:nrow(x)], difftime, time1 = x$NewDate[1], units = "mins", simplify = T))))))
+   print(paste("Scheduled fix rate (min):", sched))
+   expected=as.numeric(days)*round(1440/(as.numeric(sched)), digits=0)#1440 minutes in a day
+   print(paste("Expected number of positions:", expected))
+   success <- nrow(x)
+   print(paste("Number of recorded positions", success))
+   percentfix <- round(success/expected*100)
+   print(paste("Fix rate success = ", percentfix,"%", sep=" "))
+}
+
+# individuals
+unique(juveniles$individual.local.identifier)
+unique(juveniles$SeasonYearBurst)
+
+# prepare data
+juveniles_prep <- prepare_data(juveniles)
+head(juveniles_prep)
+
+# plot just to visualize
+plot(juveniles_prep[[2]])
+plot(juveniles_prep[[2]], col = factor(juveniles_prep[[2]]$individual.local.identifier))
+
+library(ggplot2)
+ggplot(juveniles_prep[[1]], 
+       aes(x, y, color = individual.local.identifier)) +
+   geom_point()
+
+# calculate fix rate success
+fix_deer <- ddply(juveniles_prep[[1]], .(individual.local.identifier), fix_rate)
+```
