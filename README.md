@@ -13,7 +13,8 @@ You can install the dev version of howtoRpackage from [Github](https://github.co
 ``` r
 library(devtools)
 
-devtools::install_github(repo = "https://github.com/bniebuhr/witch.git", ref = "HEAD")
+devtools::install_github(repo = "https://github.com/bniebuhr/
+howtoRpackage.git", ref = "HEAD")
 ```
 
 ## Building yourself
